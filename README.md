@@ -22,6 +22,13 @@ The following can be found in the ``config.lua`` file.
         Command = "fine", 
         MaxValue = 1001,  MaxText = "$1000." -- Sets the maxium amount an officer can fine for.
     },
+    DiscordLogs = {
+        Toggle = false,
+        Webhook = ''
+    },
+    Debug = {
+        Toggle = false
+    },
 ```
 You can toggle the command on or off, change the commands to your preference & set the maximun amount a player can be fined for.
 
