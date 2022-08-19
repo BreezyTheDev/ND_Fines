@@ -2,7 +2,7 @@
 
 ## What is it?
 
-This resource was made for [ND_Framework](https://github.com/Andyyy7666/ND_Framework). This allows LEO to fine Civilians for their charges. This is script is fully chat-based, if you have any knowledge in html or css or anything of that nature feel free to fork this and remake with that side of coding. 
+This resource was made for [ND_Framework](https://github.com/Andyyy7666/ND_Framework). This allows LEO to fine Civilians for their charges. This script is fully chat-based, if you have any knowledge in html or css or anything of that nature feel free to fork this and remake with that side of coding. 
 
 ## Commands
 
