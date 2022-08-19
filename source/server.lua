@@ -4,7 +4,10 @@
 --		GNU License v3.0		  --
 --================================--
 
+-- ND_Framework export.
 NDCore = exports["ND_Core"]:GetCoreObject()
+
+-- Commands
 if Settings.Fine.Toggle then
     RegisterCommand(Settings.Fine.Command, function(source, args, rawCommand)
         if IsPlayerAceAllowed(source, "NDFines.leo") then
@@ -21,6 +24,10 @@ if Settings.Fine.Toggle then
                         NDCore.Functions.DeductMoney(amount, target, "bank")
                         TriggerClientEvent('chatMessage', target, Settings.Prefix..' ^3You have been fined: ^5$'..amount..' ^3by ^5'..playerCName..' ^3for: ^1'..reason)
                         TriggerClientEvent('chatMessage', source, Settings.Prefix..' ^3You have sucessfully fined: ^5'..targetCName.. ' ^3for ^5$'..amount)
+                        -- Discord Logs
+                        if Settings.DiscordLogs.Toggle then
+                            sendToDisc("PLAYER FINED", "Player **" .. GetPlayerName(args[1]) .. "** has been fined by " .. "**".. GetPlayerName(player) .. "** $"..amount.." for: "..reason, "[ND_Fines]");
+                        end
                     else
                         TriggerClientEvent('chatMessage', source, '^1ERROR: You must include a reason for the fine.')
                     end
@@ -37,3 +44,24 @@ if Settings.Fine.Toggle then
     end, false)
 end
 
+-- Functions
+function sendToDisc(title, msg)
+    local embed = {}
+    embed = {
+        {
+            ["color"] = 44270,
+            ["title"] = "**".. title .."**",
+            ["description"] = msg,
+            ["footer"] = footer,
+        }
+    }
+    PerformHttpRequest(Settings.DiscordLogs.Webhook, 
+    function(err, text, headers) end, 'POST', json.encode({username = name, embeds = embed}), { ['Content-Type'] = 'application/json' })
+end
+
+-- Debug
+if Settings.Debug.Toggle then
+    if Settings.DiscordLogs.Webhook == '' then
+        print("Debug: In order for discord logs to work properly a webhook needs to be added in the config.")
+    end
+end
