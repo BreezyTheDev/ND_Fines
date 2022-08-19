@@ -26,7 +26,7 @@ if Settings.Fine.Toggle then
                         TriggerClientEvent('chatMessage', source, Settings.Prefix..' ^3You have sucessfully fined: ^5'..targetCName.. ' ^3for ^5$'..amount)
                         -- Discord Logs
                         if Settings.DiscordLogs.Toggle then
-                            sendToDisc("PLAYER FINED", "Player **" .. GetPlayerName(args[1]) .. "** has been fined by " .. "**".. GetPlayerName(player) .. "** $"..amount.." for: "..reason, "[ND_Fines]");
+                            sendToDisc("PLAYER FINED", "Player **" .. GetPlayerName(args[1]) .. "** has been fined $"..amount.. " by " .. "**".. GetPlayerName(player) .. "** for: "..reason, "[ND_Fines]");
                         end
                     else
                         TriggerClientEvent('chatMessage', source, '^1ERROR: You must include a reason for the fine.')
