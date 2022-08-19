@@ -29,7 +29,7 @@ if Settings.Fine.Toggle then
                 end
             else
                 -- Wrong syntax, it's /fine <id> <amount>
-                TriggerClientEvent('chatMessage', source, '^1ERROR: Wrong usage. /fine <id> <amount>')
+                TriggerClientEvent('chatMessage', source, '^1ERROR: Wrong usage. /fine <id> <amount> <reason>')
             end
         else
             TriggerClientEvent('chatMessage', source, '^1ERROR: You do not have permission to utilize this command.')
