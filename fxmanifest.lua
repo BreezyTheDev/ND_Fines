@@ -1,7 +1,7 @@
 -- For support join my discord: https://discord.gg/Z9Mxu72zZ6
 author "Breezy#0001"
 description "ND_Fines"
-version "1.0"
+version "1.1"
 
 fx_version "cerulean"
 game "gta5"
