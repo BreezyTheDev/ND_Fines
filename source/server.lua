@@ -60,7 +60,7 @@ function sendToDisc(title, msg)
 end
 
 -- Debug
-if Settings.Debug.Toggle then
+if Settings.DiscordLogs.Toggle and Settings.Debug.Toggle then
     if Settings.DiscordLogs.Webhook == '' then
         print("Debug: In order for discord logs to work properly a webhook needs to be added in the config.")
     end
