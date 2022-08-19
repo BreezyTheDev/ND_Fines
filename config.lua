@@ -11,4 +11,11 @@ Settings = {
         Command = "fine", 
         MaxValue = 1001,  MaxText = "$1000." -- Sets the maxium amount an officer can fine for.
     },
+    DiscordLogs = {
+        Toggle = false,
+        Webhook = '' -- Be sure to include the webhook link.
+    },
+    Debug = {
+        Toggle = false
+    },
 }
