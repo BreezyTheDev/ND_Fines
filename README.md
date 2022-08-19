@@ -16,7 +16,6 @@ This resource was made for [ND_Framework](https://github.com/Andyyy7666/ND_Frame
 
 The following can be found in the ``config.lua`` file.
 ```
-
     Prefix = "^3[^1Police^3] ",
     Fine = {
         Toggle = true,
