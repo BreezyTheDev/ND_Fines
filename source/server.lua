@@ -16,20 +16,23 @@ if Settings.Fine.Toggle then
             local amount = tonumber(args[2])
             local reason = table.concat(args, " ", 3)
             local players = NDCore.Functions.GetPlayers()
-            local playerCName = players[player].firstName .. ' ' .. players[player].lastName
-            local targetCName = players[target].firstName .. ' ' .. players[target].lastName
             if target and amount ~= nil then
                 if amount < Settings.Fine.MaxValue then
                     if reason ~= "" then
                         NDCore.Functions.DeductMoney(amount, target, "bank")
+                        local playerCName = players[player].firstName .. ' ' .. players[player].lastName
+                        local targetCName = players[target].firstName .. ' ' .. players[target].lastName
                         TriggerClientEvent('chatMessage', target, Settings.Prefix..' ^3You have been fined: ^5$'..amount..' ^3by ^5'..playerCName..' ^3for: ^1'..reason)
                         TriggerClientEvent('chatMessage', source, Settings.Prefix..' ^3You have sucessfully fined: ^5'..targetCName.. ' ^3for ^5$'..amount)
                         -- Discord Logs
                         if Settings.DiscordLogs.Toggle then
-                            sendToDisc("PLAYER FINED", "Player **" .. GetPlayerName(args[1]) .. "** has been fined $"..amount.. " by " .. "**".. GetPlayerName(player) .. "** for: "..reason, "[ND_Fines]");
+                            sendToDisc("PLAYER FINED", "Player **" .. GetPlayerName(target) .. "** has been fined $"..amount.. " by " .. "**".. GetPlayerName(player) .. "** for: "..reason);
                         end
                     else
                         TriggerClientEvent('chatMessage', source, '^1ERROR: You must include a reason for the fine.')
+                        if Settings.DiscordLogs.Toggle then
+                           sendToDisc("FINE REQUEST: Rejected", "Player **" .. GetPlayerName(source) .. "** attempted to give a fine over "..Settings.Fine.MaxText);
+                        end
                     end
                 else
                     TriggerClientEvent('chatMessage', source, '^1ERROR: You can only fine up to '..Settings.Fine.MaxText)
@@ -52,7 +55,9 @@ function sendToDisc(title, msg)
             ["color"] = 44270,
             ["title"] = "**".. title .."**",
             ["description"] = msg,
-            ["footer"] = footer,
+            ["footer"] = {
+                ["text"] = "[ND_Fines]",
+            },
         }
     }
     PerformHttpRequest(Settings.DiscordLogs.Webhook, 
@@ -62,6 +67,6 @@ end
 -- Debug
 if Settings.DiscordLogs.Toggle and Settings.Debug.Toggle then
     if Settings.DiscordLogs.Webhook == '' then
-        print("Debug: In order for discord logs to work properly a webhook needs to be added in the config.")
+        print("^1[ND_Fines Debug] ^3In order for discord logs to work properly a webhook needs to be added in the config.")
     end
 end
