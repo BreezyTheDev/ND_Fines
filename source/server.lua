@@ -12,21 +12,19 @@ if Settings.Fine.Toggle then
     RegisterCommand(Settings.Fine.Command, function(source, args, rawCommand)
         if IsPlayerAceAllowed(source, "NDFines.leo") then
             local player = source
-            local target = tonumber(args[1])
             local amount = tonumber(args[2])
             local reason = table.concat(args, " ", 3)
             local players = NDCore.Functions.GetPlayers()
-            if target and amount ~= nil then
+            local playerCName = players[player].firstName .. ' ' .. players[player].lastName
+            if tonumber(args[1] and amount ~= nil then
                 if amount < Settings.Fine.MaxValue then
                     if reason ~= "" then
-                        NDCore.Functions.DeductMoney(amount, target, "bank")
-                        local playerCName = players[player].firstName .. ' ' .. players[player].lastName
-                        local targetCName = players[target].firstName .. ' ' .. players[target].lastName
-                        TriggerClientEvent('chatMessage', target, Settings.Prefix..' ^3You have been fined: ^5$'..amount..' ^3by ^5'..playerCName..' ^3for: ^1'..reason)
-                        TriggerClientEvent('chatMessage', source, Settings.Prefix..' ^3You have sucessfully fined: ^5'..targetCName.. ' ^3for ^5$'..amount)
+                        NDCore.Functions.DeductMoney(amount, tonumber(args[1], "bank")
+                        TriggerClientEvent('chatMessage', tonumber(args[1]), Settings.Prefix..' ^3You have been fined: ^5$'..amount..' ^3by ^5'..playerCName..' ^3for: ^1'..reason)
+                        TriggerClientEvent('chatMessage', source, Settings.Prefix..' ^3You have sucessfully fined: ^5'..players[tonumber(args[1])].firstName .." ".. players[tonumber(args[1])].lastName.. ' ^3for ^5$'..amount)
                         -- Discord Logs
                         if Settings.DiscordLogs.Toggle then
-                            sendToDisc("PLAYER FINED", "Player **" .. GetPlayerName(target) .. "** has been fined $"..amount.. " by " .. "**".. GetPlayerName(player) .. "** for: "..reason);
+                            sendToDisc("PLAYER FINED", "Player **" .. GetPlayerName(tonumber(args[1])) .. "** has been fined $"..amount.. " by " .. "**".. GetPlayerName(player) .. "** for: "..reason);
                         end
                     else
                         TriggerClientEvent('chatMessage', source, '^1ERROR: You must include a reason for the fine.')
