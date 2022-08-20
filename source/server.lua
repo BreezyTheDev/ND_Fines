@@ -28,12 +28,12 @@ if Settings.Fine.Toggle then
                         end
                     else
                         TriggerClientEvent('chatMessage', source, '^1ERROR: You must include a reason for the fine.')
-                        if Settings.DiscordLogs.Toggle then
-                           sendToDisc("FINE REQUEST: Rejected", "Player **" .. GetPlayerName(source) .. "** attempted to give a fine over "..Settings.Fine.MaxText);
-                        end
                     end
                 else
                     TriggerClientEvent('chatMessage', source, '^1ERROR: You can only fine up to '..Settings.Fine.MaxText)
+                    if Settings.DiscordLogs.Toggle then
+                       sendToDisc("FINE REQUEST: Rejected", "Player **" .. GetPlayerName(source) .. "** attempted to give a fine over "..Settings.Fine.MaxText);
+                    end
                 end
             else
                 -- Wrong syntax, it's /fine <id> <amount> <reason>
