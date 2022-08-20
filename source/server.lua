@@ -16,10 +16,10 @@ if Settings.Fine.Toggle then
             local reason = table.concat(args, " ", 3)
             local players = NDCore.Functions.GetPlayers()
             local playerCName = players[player].firstName .. ' ' .. players[player].lastName
-            if tonumber(args[1] and amount ~= nil then
+            if tonumber(args[1]) and amount ~= nil then
                 if amount < Settings.Fine.MaxValue then
                     if reason ~= "" then
-                        NDCore.Functions.DeductMoney(amount, tonumber(args[1], "bank")
+                        NDCore.Functions.DeductMoney(amount, tonumber(args[1]), "bank")
                         TriggerClientEvent('chatMessage', tonumber(args[1]), Settings.Prefix..' ^3You have been fined: ^5$'..amount..' ^3by ^5'..playerCName..' ^3for: ^1'..reason)
                         TriggerClientEvent('chatMessage', source, Settings.Prefix..' ^3You have sucessfully fined: ^5'..players[tonumber(args[1])].firstName .." ".. players[tonumber(args[1])].lastName.. ' ^3for ^5$'..amount)
                         -- Discord Logs
@@ -65,6 +65,6 @@ end
 -- Debug
 if Settings.DiscordLogs.Toggle and Settings.Debug.Toggle then
     if Settings.DiscordLogs.Webhook == '' then
-        print("^1[ND_Fines Debug] ^3In order for discord logs to work properly a webhook needs to be added in the config.")
+        print("^1[ND_Fines Debug] ^3In order for discord logs to work properly a webhook needs to be added in the config. ^7")
     end
 end
